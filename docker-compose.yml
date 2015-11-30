@@ -1,0 +1,7 @@
+rabbitmq:
+  image: rabbitmq:management
+  hostname: rabbit-h
+  container_name: rabbit-c
+  ports:
+    - "5672:5672"
+    - "15672:15672"

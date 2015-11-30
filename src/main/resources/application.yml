@@ -1,0 +1,38 @@
+#debug: true
+security.user.password: password
+
+logging:
+  level:
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+    org.springframework.test.context.cache: DEBUG #To know exactly how many contexts have been loaded and cached.
+
+server:
+  context-path: /@project.artifactId@/
+
+
+
+management:
+  context-path: /mgmt
+  security:
+    enabled: false
+
+endpoints:
+  actuator:
+    path: /
+
+
+spring:
+  rabbitmq:
+    host: ${rabbitmq_host:dockerhost}
+    port: ${rabbitmq_port:5672}
+    username: ${rabbitmq_user:guest}
+    password: ${rabbitmq_password:guest}
+
+
+info:
+  application:
+    artifactId: @project.artifactId@
+    groupId: @project.groupId@
+
+

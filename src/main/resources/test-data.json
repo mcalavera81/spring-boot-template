@@ -1,0 +1,3 @@
+[ { "_class" : "com.propero.feedService.domain.FeedSource",
+  "id" : 1,
+  "source" : "MySource" }]
