@@ -1,14 +1,13 @@
 package com.propero.feedService.service.documentation;
 
 import com.propero.feedService.FeedServiceApplication;
+import com.propero.feedService.service.BaseTest;
 import org.junit.Before;
-import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.http.MediaType;
-import org.springframework.restdocs.RestDocumentation;
 import org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
@@ -17,6 +16,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
 import static org.hamcrest.Matchers.is;
+import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.documentationConfiguration;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -26,15 +26,15 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = FeedServiceApplication.class)
 @WebAppConfiguration
-public class FeedApiDocumentation {
+public class FeedApiDocumentation extends BaseTest{
 
     @Autowired
     private WebApplicationContext webContext;
 
     private MockMvc mockMvc;
 
-    @Rule
-    public final RestDocumentation restDocumentation = new RestDocumentation("build/generated-snippets");
+    /*@Rule
+    public final RestDocumentation restDocumentation = new RestDocumentation("target/generated-snippets/");*/
 
     @Before
     public void setupMockMvc() {
@@ -55,7 +55,8 @@ public class FeedApiDocumentation {
                 .andExpect(content().contentType((MediaType.APPLICATION_JSON_UTF8)))
                 .andExpect(jsonPath("$.price",is("190.1")))
                 .andExpect(jsonPath("$.dateTime",is("10/10/10 10:10:22")))
-                .andExpect(jsonPath("$.asset",is("EURUSD")));
+                .andExpect(jsonPath("$.asset",is("EURUSD")))
+                .andDo(document("getFeedSource"));
 
     }
 

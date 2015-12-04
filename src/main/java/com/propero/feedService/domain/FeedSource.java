@@ -1,26 +1,39 @@
 package com.propero.feedService.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import com.propero.feedService.enums.FeedId;
+import lombok.ToString;
+
+import javax.persistence.*;
 
 /**
  * Created by farid on 26/11/15.
  */
 @Entity
-public class FeedSource {
+@ToString(callSuper = true)
+public class FeedSource extends BaseEntity{
+
+
+    public FeedSource() {}
+
+    public FeedSource(FeedId feedId) {
+        this.feedId = feedId;
+    }
 
     @Id
     @GeneratedValue(generator = Constants.ID_GENERATOR)
     private Long id;
 
-    private String source;
+    @Enumerated(EnumType.STRING)
+    private FeedId feedId;
 
-    public String getSource() {
-        return source;
+
+    public FeedId getFeedId() {
+        return feedId;
     }
 
-    public void setSource(String source) {
-        this.source = source;
+    public void setFeedId(FeedId feedId) {
+        this.feedId = feedId;
     }
+
+
 }

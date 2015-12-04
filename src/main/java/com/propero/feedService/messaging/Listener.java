@@ -18,6 +18,7 @@ package com.propero.feedService.messaging;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.propero.feedService.domain.FeedData;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.core.Message;
 import org.springframework.amqp.core.Queue;
 import org.springframework.amqp.rabbit.annotation.Exchange;
@@ -36,6 +37,7 @@ import java.io.IOException;
 @Component
 //@EnableRabbit
 @EnableScheduling
+@Slf4j
 public class Listener {
 
 	@Bean
@@ -51,11 +53,13 @@ public class Listener {
 	private ObjectMapper mapper = new ObjectMapper();
 
 
+
 	@RabbitListener(bindings = {
 			@QueueBinding(value=@org.springframework.amqp.rabbit.annotation.Queue(value = "aaa",durable = "true"),
 			exchange = @Exchange(value = "amq.direct",durable = "true"))})
 	public void processA(Message msg, @Header("contentType") String contentType) throws IOException {
 
+		log.info("Hello");
 		if(contentType.equals("application/json")){
 			FeedData feedData = mapper.readValue(msg.getBody(), FeedData.class);
 			System.out.println(feedData);

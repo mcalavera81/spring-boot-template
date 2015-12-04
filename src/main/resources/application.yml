@@ -20,19 +20,41 @@ management:
 endpoints:
   actuator:
     path: /
+  liquibase:
+    enabled: true
 
 
 spring:
   rabbitmq:
-    host: ${rabbitmq_host:dockerhost}
-    port: ${rabbitmq_port:5672}
-    username: ${rabbitmq_user:guest}
-    password: ${rabbitmq_password:guest}
+    host: dockerhost
+    port: 5672
+    username: guest
+    password: guest
 
+  jpa:
+    show-sql: true
 
 info:
   application:
     artifactId: @project.artifactId@
     groupId: @project.groupId@
+
+springfox.documentation.swagger.v2.path: /api-docs
+
+
+---
+
+spring:
+  profiles: migration
+  datasource:
+      url: @jdbc.url@
+      username: @jdbc.username@
+      password: @jdbc.password@
+      driver-class-name: @jdbc.driverClassName@
+  jpa:
+      generate-ddl: true
+      hibernate:
+        ddl-auto: create-drop
+
 
 

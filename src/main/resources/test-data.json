@@ -1,3 +1,15 @@
 [ { "_class" : "com.propero.feedService.domain.FeedSource",
   "id" : 1,
-  "source" : "MySource" }]
+  "feedId" : "MyFeed1" },
+  { "_class" : "com.propero.feedService.domain.FeedSource",
+    "id" : 2,
+    "feedId" :"MyFeed1"},
+  { "_class" : "com.propero.feedService.domain.FeedSource",
+    "id" : 3,
+    "feedId" : "MyFeed2" },
+  { "_class" : "com.propero.feedService.domain.FeedSource",
+    "id" : 4,
+    "feedId" : "MyFeed2" },
+  { "_class" : "com.propero.feedService.domain.FeedSource",
+    "id" : 5,
+    "feedId" : "MyFeed1" }]
